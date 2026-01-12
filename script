@@ -1,0 +1,51 @@
+'sudo systemctl restart jenkins'   
+'sudo systemctl status jenkins'  
+/////script to build bindeb-pkg 
+pipeline {
+    agent any
+ 
+    environment {
+        KERNEL_DIR = "/home/nikita/webhook_kernel_building/linux"
+    }
+ 
+    stages {
+ 
+        stage('Configuring') {
+ steps {
+                sh '''
+                    echo "[INFO] Cleaning previous build..."
+                    cd ${KERNEL_DIR}
+                    make mrproper
+                    make defconfig
+                '''
+            }
+        }
+ 
+        stage('Building') {
+            steps {
+                sh '''
+ echo "[INFO] Building kernel..."
+                    cd ${KERNEL_DIR}
+                    make -j$(nproc)
+                '''
+            }
+        }
+ 
+        stage('Creating PKGs') {
+            steps {
+                sh '''
+                    echo "[INFO] Creating deb packages..."
+                    cd ${KERNEL_DIR}
+                    make -j$(nproc) bindeb-pkg
+                '''
+     '''
+            }
+        }
+ 
+        stage('Completed') {
+            steps {
+                echo "Kernel build and packaging completed!"
+            }
+        }
+    }
+}
