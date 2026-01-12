@@ -14,7 +14,7 @@ pipeline {
                 sh './new.sh'
             }
         }
-    }
+    
         stage('Configuring') {
  steps {
                 sh '''
@@ -52,5 +52,5 @@ pipeline {
             }
         }
     }
-
+}
 
