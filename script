@@ -9,7 +9,12 @@ pipeline {
     }
  
     stages {
- 
+        stage('Run Script') {
+            steps {
+                sh './build.sh'
+            }
+        }
+    }
         stage('Configuring') {
  steps {
                 sh '''
@@ -48,4 +53,5 @@ pipeline {
             }
         }
     }
-}
+
+
