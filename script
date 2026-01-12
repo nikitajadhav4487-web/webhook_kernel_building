@@ -43,7 +43,6 @@ pipeline {
                     cd ${KERNEL_DIR}
                     make -j$(nproc) bindeb-pkg
                 '''
-     '''
             }
         }
  
