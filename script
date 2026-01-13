@@ -2,10 +2,11 @@
 'sudo systemctl status jenkins'  
 /////script to build bindeb-pkg 
 pipeline {
-    agent any
- 
+agent {
+        label 'kernel'
+    } 
     environment {
-        KERNEL_DIR = "/home/nikita/webhook_kernel_building/linux"
+        KERNEL_DIR = "/home/nikita/jenkins/webhook_kernel_building/linux"
     }
  
     stages {
